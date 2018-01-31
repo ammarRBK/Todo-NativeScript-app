@@ -8,6 +8,10 @@ var dialogsModule = require("ui/dialogs");
 
 var frameModule= require("ui/frame");
 
+var auth= require("./share/view-models/auth");
+
+var submitAuth= new auth();
+
 /*
 NativeScript adheres to the CommonJS specification for dealing with
 JavaScript modules. The CommonJS require() function is how you import
@@ -44,7 +48,32 @@ file work.
 */
 exports.onNavigatingTo = onNavigatingTo;
 
-exports.pressSignUp =function () {
+exports.signin= function (){
+    var user= submitAuth.username;
+    if(submitAuth.login() === "welcom"){
+        dialogsModule.alert({
+            message:"welcome to you todoList",
+            okButtonText:"ok"
+        })
+        return;
+    }else if(submitAuth.login() === "wrong password"){
+        dialogsModule.alert({
+            message:"sorry wrong password",
+            okButtonText:"ok"
+        })
+        return Promise.reject();
+    }else if(submitAuth.login() === "we do not have this user"){
+        
+        dialogsModule.alert({
+            message:user,
+            okButtonText:"ok"
+        })
+        return Promise.reject();
+    }
+    alert("do somthing");
+} 
+
+exports.pressSignUp = function () {
     var frame= frameModule.topmost();
 
     frame.navigate("./signup/signup");
