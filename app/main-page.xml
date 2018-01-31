@@ -10,10 +10,10 @@ https://docs.nativescript.org/ui/components.
     http://docs.nativescript.org/ui/action-bar
     -->
     <Page.actionBar>
-        <ActionBar title="My App" icon="" class="action-bar">
+        <ActionBar title="                       My Todo List" class="action-bar">
         </ActionBar>
     </Page.actionBar>
-    <!--
+    <!--''
     The StackLayout stacks UI components on the screen—either vertically or horizontally.
     In this case, the StackLayout does vertical stacking; you can change the stacking to
     horizontal by applying a orientation="horizontal" attribute to the <StackLayout> element.
@@ -25,8 +25,9 @@ https://docs.nativescript.org/ui/components.
     class names available for styling your app at https://docs.nativescript.org/ui/theme.
     -->
     <StackLayout class="p-20">
-        <Label text="Tap the button" class="h1 text-center"/>
-        <Button text="TAP" tap="{{ onTap }}" class="btn btn-primary btn-active"/>
-        <Label text="{{ message }}" class="h2 text-center" textWrap="true"/>
+        <TextField hint="Enter your username" text="{{ username }}" id="username" autocapitalizationType="none"/>
+        <TextField hint="Enter the Password" text="{{ password }}" id="password" secure="true"/>
+        <Button text="Submit" tap="signup" class="btn btn-primary btn-active"/>
+       <Label text="OR PRESS" style="margin-left: 120;"/> <Button text="Sign In" tap="pressSignIn"/>
     </StackLayout>
 </Page>

@@ -4,6 +4,10 @@ a code-behind file. The code-behind is a great place to place your view
 logic, and to set up your page’s data binding.
 */
 
+var dialogsModule = require("ui/dialogs");
+
+var frameModule= require("ui/frame");
+
 /*
 NativeScript adheres to the CommonJS specification for dealing with
 JavaScript modules. The CommonJS require() function is how you import
@@ -39,3 +43,9 @@ function here makes the navigatingTo="onNavigatingTo" binding in this page’s X
 file work.
 */
 exports.onNavigatingTo = onNavigatingTo;
+
+exports.pressSignIn =function () {
+    var frame= frameModule.topmost();
+
+    frame.navigate("./login/login");
+}
