@@ -27,7 +27,7 @@ https://docs.nativescript.org/ui/components.
     <StackLayout class="p-20">
         <TextField hint="Enter your username" text="{{ username }}" id="username" autocapitalizationType="none"/>
         <TextField hint="Enter the Password" text="{{ password }}" id="password" secure="true"/>
-        <Button text="Submit" tap="signup" class="btn btn-primary btn-active"/>
-       <Label text="OR PRESS" style="margin-left: 120;"/> <Button text="Sign In" tap="pressSignIn"/>
+        <Button text="Submit" tap="signin" class="btn btn-primary btn-active"/>
+       <Label text="OR PRESS" style="margin-left: 120;"/> <Button text="Sign Up" tap="pressSignUp"/>
     </StackLayout>
 </Page>

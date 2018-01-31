@@ -44,8 +44,8 @@ file work.
 */
 exports.onNavigatingTo = onNavigatingTo;
 
-exports.pressSignIn =function () {
+exports.pressSignUp =function () {
     var frame= frameModule.topmost();
 
-    frame.navigate("./login/login");
+    frame.navigate("./signup/signup");
 }

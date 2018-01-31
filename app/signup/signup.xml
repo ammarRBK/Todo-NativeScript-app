@@ -1,0 +1,5 @@
+<page loaded="loade">
+    <StackLayout>
+        <image src="../share/images/firstpage.jpg" stretch="none" horizontalAlignment="center"></image>
+    </StackLayout>
+</page>
