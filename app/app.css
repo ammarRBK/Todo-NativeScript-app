@@ -16,18 +16,20 @@ The imported CSS rules must precede all other types of rules.
 The following CSS rule changes the font size of all UI
 components that have the btn class name.
 */
+
+/* background-image: url("http://www.imgion.com/images/01/Youre-very-welcome.jpg");
+   background-repeat: no-repeat;
+   /* Full height */
+   /* height: 100%;  */
+
+   /* Center and scale the image nicely */
+   /* background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover; */
+    
 Page{
     background-color: rgba(248, 241, 241, 0.918);
    font-size: 17;
-   background-image: url("http://www.imgion.com/images/01/Youre-very-welcome.jpg");
-   background-repeat: no-repeat;
-   /* Full height */
-   height: 100%; 
-
-   /* Center and scale the image nicely */
-   background-position: center;
-   background-repeat: no-repeat;
-   background-size: cover;
 }
 
 TextField {

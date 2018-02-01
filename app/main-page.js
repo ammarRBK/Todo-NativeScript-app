@@ -18,14 +18,14 @@ JavaScript modules. The CommonJS require() function is how you import
 JavaScript modules defined in other files.
 */ 
 var createViewModel = require("./main-view-model").createViewModel;
-
+var page;
 function onNavigatingTo(args) {
     /*
     This gets a reference this page’s <Page> UI component. You can
     view the API reference of the Page to see what’s available at
     https://docs.nativescript.org/api-reference/classes/_ui_page_.page.html
     */
-    var page = args.object;
+    page = args.object;
 
     /*
     A page’s bindingContext is an object that should be used to perform
@@ -49,23 +49,26 @@ file work.
 exports.onNavigatingTo = onNavigatingTo;
 
 exports.signin= function (){
-    var user= submitAuth.username;
-    if(submitAuth.login() === "welcom"){
+    var user= {
+        username:page.getViewById("username").text,
+        password:page.getViewById("password").text
+    }
+    if(submitAuth.login(user) === "welcom"){
         dialogsModule.alert({
             message:"welcome to you todoList",
             okButtonText:"ok"
         })
         return;
-    }else if(submitAuth.login() === "wrong password"){
+    }else if(submitAuth.login(user) === "wrong password"){
         dialogsModule.alert({
             message:"sorry wrong password",
             okButtonText:"ok"
         })
         return Promise.reject();
-    }else if(submitAuth.login() === "we do not have this user"){
+    }else if(submitAuth.login(user) === "we do not have this user"){
         
         dialogsModule.alert({
-            message:user,
+            message:"wrong username",
             okButtonText:"ok"
         })
         return Promise.reject();

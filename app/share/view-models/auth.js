@@ -1,7 +1,7 @@
 var config= require("../config/config");
 
 var fetchModel= require("fetch");
-
+var user= require("../../main-page").user;
 var observableModule = require("data/observable");
 
 function authSystem (info){
@@ -10,9 +10,9 @@ function authSystem (info){
         username: info.username || "",
         password: info.password || ""
     });
-    viewModel.login= function (){
-      var userName= viewModel.get("username");
-      var passWord= viewModel.get("password");
+    viewModel.login= function (users){
+      var userName= users.username;
+      var passWord=users.password;
       viewModel.username= userName;
       if(userName === "ammar"){
           if(passWord === "1234"){
