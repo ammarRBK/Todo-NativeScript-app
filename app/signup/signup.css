@@ -1,0 +1,11 @@
+.button1 {
+    background-color: rgb(2, 253, 57); 
+    color: rgb(251, 253, 250); 
+    border: 2px solid #4CAF50;
+}
+
+Label{
+    margin-left: 100;
+    color: white;
+    background-color: red;
+}

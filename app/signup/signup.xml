@@ -1,5 +1,9 @@
-<page loaded="loade">
+<page loaded="isLoade">
     <StackLayout>
-        <image src="../share/images/firstpage.jpg" stretch="none" horizontalAlignment="center"></image>
+        <Label text="{{errorMassage}}"/>
+        <TextField  hint="Enter Your username" id="username" text="{{username}}" autocapitalizationType="none"/>
+        <TextField hint="Enter your password" id="password" secure="true" text="{{password}}"/>
+        <Button tap="signup" text="Submit Sign Up" class="button1"/>
+        <image src="http://docs.sequelizejs.com/manual/asset/logo-small.png" stretch="none" horizontalAlignment="center"></image>
     </StackLayout>
 </page>
