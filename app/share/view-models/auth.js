@@ -4,7 +4,9 @@ var fetchModel= require("fetch");
 var user= require("../../main-page").user;
 var observableModule = require("data/observable");
 
-function authSystem (info){
+var comminucationVar="";
+
+exports.authSystem= function (info){
     info = info || {};
     var viewModel = new observableModule.fromObject({
         username: info.username || "",
@@ -15,15 +17,26 @@ function authSystem (info){
     viewModel.login= function (users){
       var userName= users.username;
       var passWord=users.password;
-      viewModel.username= userName;
-      if(userName === "ammar"){
-          if(passWord === "1234"){
-              return "welcom";
-          }
-          return "wrong password";
-      }
-      return "we do not have this user" ;
-    };
+    //   viewModel.username= userName;
+    return fetchModel.fetch(config + "login",{
+        method: "POST",
+        body:JSON.stringify({
+            username:userName,
+            password:passWord
+        }),
+        headers:{
+            "Content-Type": "application/json"
+        },
+        async:false
+    }).then(handleErrors)
+    .then(response =>{
+        return response.json()
+    })
+    .then(data =>{
+        console.log(data);
+        comminucationVar= data;
+    })
+}
 
     viewModel.signupMessage="";
     viewModel.signup= function (newUser){
@@ -57,6 +70,8 @@ function authSystem (info){
     return viewModel;
 }
 
+exports.comminucationVar= comminucationVar;
+
 function handleErrors(response) {
     if (!response.ok) {
         console.log(JSON.stringify(response));
@@ -64,5 +79,3 @@ function handleErrors(response) {
     }
     return response;
 }
-
-module.exports= authSystem;

@@ -8,7 +8,9 @@ var dialogsModule = require("ui/dialogs");
 
 var frameModule= require("ui/frame");
 
-var auth= require("./share/view-models/auth");
+var messageModel= require("./share/view-models/auth").comminucationVar;
+
+var auth= require("./share/view-models/auth").authSystem;
 
 var submitAuth= new auth();
 
@@ -53,19 +55,20 @@ exports.signin= function (){
         username:page.getViewById("username").text,
         password:page.getViewById("password").text
     }
-    if(submitAuth.login(user) === "welcom"){
+    submitAuth.login(user);
+    if( messageModel === "welcom"){
         dialogsModule.alert({
-            message:"welcome to you todoList",
+            message:"welcome to your todoList",
             okButtonText:"ok"
         })
         return;
-    }else if(submitAuth.login(user) === "wrong password"){
+    }else if(messageModel === "wrong password"){
         dialogsModule.alert({
             message:"sorry wrong password",
             okButtonText:"ok"
         })
         return Promise.reject();
-    }else if(submitAuth.login(user) === "we do not have this user"){
+    }else if(!messageModel){
         
         dialogsModule.alert({
             message:"wrong username",
