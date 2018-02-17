@@ -1,4 +1,4 @@
-var config= require("../config/config");
+var config= require("../config/config").url;
 
 var fetchModel= require("fetch");
 var user= require("../../main-page").user;
@@ -25,21 +25,34 @@ function authSystem (info){
       return "we do not have this user" ;
     };
 
-    viewModel.users= [{username:"ammar",password:"1234"}];
-
-    viewModel.signup= function (){
-        var newName= viewModel.get("username");
-        var newPassword= viewModel.get("password");
-        for(var i=0; i<viewModel.users.length; i++){
-            if(viewModel.users[i].username === newName){
-                return viewModel.get("errorMassage")= "Existing user retry with new username";
-            }
-            viewModel.users.push({
-                username:newName,
-                password:newPassword
-            });
-            return "added user done";
-        }
+    viewModel.signupMessage="";
+    viewModel.signup= function (newUser){
+        return fetchModel.fetch(config + "adduser",{
+            method: "POST",
+            body: JSON.stringify(newUser),
+            headers: {
+                "Content-Type":"application/json"
+            },
+            async: false
+        }).then(handleErrors)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+           viewModel.signupMessage= data; 
+        });
+        // var newName= viewModel.get("username");
+        // var newPassword= viewModel.get("password");
+        // for(var i=0; i<viewModel.users.length; i++){
+        //     if(viewModel.users[i].username === newName){
+        //         return viewModel.get("errorMassage")= "Existing user retry with new username";
+        //     }
+        //     viewModel.users.push({
+        //         username:newName,
+        //         password:newPassword
+        //     });
+        //     return "added user done";
+        // }
     }
     return viewModel;
 }

@@ -1,4 +1,4 @@
-<page loaded="isLoade">
+<page loaded="isLoaded">
     <StackLayout>
         <Label text="{{errorMassage}}"/>
         <TextField  hint="Enter Your username" id="username" text="{{username}}" autocapitalizationType="none"/>
