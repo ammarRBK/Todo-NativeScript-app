@@ -3,21 +3,23 @@ var config= require("../config/config").url;
 var fetchModel= require("fetch");
 var user= require("../../main-page").user;
 var observableModule = require("data/observable");
+var frameModule= require("ui/frame");
 
 var comminucationVar="";
 
-exports.authSystem= function (info){
+function authSystem  (info){
     info = info || {};
     var viewModel = new observableModule.fromObject({
         username: info.username || "",
         password: info.password || "",
-        errorMassage:""    
+        errorMassage:"",
+        comminucationVar:comminucationVar    
     });
-
+    
     viewModel.login= function (users){
       var userName= users.username;
       var passWord=users.password;
-    //   viewModel.username= userName;
+      
     return fetchModel.fetch(config + "login",{
         method: "POST",
         body:JSON.stringify({
@@ -29,16 +31,20 @@ exports.authSystem= function (info){
         },
         async:false
     }).then(handleErrors)
-    .then(response =>{
-        return response.json()
+    .then(function(response) {
+        response.json();
     })
-    .then(data =>{
-        console.log(data);
-        comminucationVar= data;
+    .then(function(data) {
+        console.log(data.username);
+        if(data.password === passWord){
+            // console.log("--------------> welcom "+"\n"+data.password)
+            return "welcome"
+        }
+        console.log("-------------------->"+"\n"+"wrong password")
+        throw Error("wrong password");
     })
-}
+};
 
-    viewModel.signupMessage="";
     viewModel.signup= function (newUser){
         return fetchModel.fetch(config + "adduser",{
             method: "POST",
@@ -70,8 +76,6 @@ exports.authSystem= function (info){
     return viewModel;
 }
 
-exports.comminucationVar= comminucationVar;
-
 function handleErrors(response) {
     if (!response.ok) {
         console.log(JSON.stringify(response));
@@ -79,3 +83,5 @@ function handleErrors(response) {
     }
     return response;
 }
+
+module.exports= authSystem;

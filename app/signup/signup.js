@@ -17,9 +17,9 @@ exports.isLoaded= function(args){
 
 
 exports.signup= function (){
-    
     var username= page.getViewById("username").text;
     var password= page.getViewById("password").text;
+
     upFunction.signup({username:username,password:password}).then( ()=> {
         if(!newUser){
         throw Error("fill the user");

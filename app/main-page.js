@@ -8,12 +8,9 @@ var dialogsModule = require("ui/dialogs");
 
 var frameModule= require("ui/frame");
 
-var messageModel= require("./share/view-models/auth").comminucationVar;
+var submitAuth= require("./share/view-models/auth");
 
-var auth= require("./share/view-models/auth").authSystem;
-
-var submitAuth= new auth();
-
+var auth= new submitAuth();
 /*
 NativeScript adheres to the CommonJS specification for dealing with
 JavaScript modules. The CommonJS require() function is how you import
@@ -55,28 +52,56 @@ exports.signin= function (){
         username:page.getViewById("username").text,
         password:page.getViewById("password").text
     }
-    submitAuth.login(user);
-    if( messageModel === "welcom"){
+    auth.login(user).catch(err => {
+        console.log("------>",err)
+        if(err === "wrong username"){
+            dialogsModule.alert({
+                title: "field login",
+                message:"wrong username",
+                okButtonText:"ok"
+            })
+            return Promise.reject()
+        }else if(err === "wrong password"){
+            dialogsModule.alert({
+                title: "field login",
+                message:"wrong password",
+                okButtonText:"ok"
+            })
+            return Promise.reject()
+        }
+    })
+    .then(function(data){
+        console.log(data)
         dialogsModule.alert({
+            title: "success login",
             message:"welcome to your todoList",
             okButtonText:"ok"
         })
-        return;
-    }else if(messageModel === "wrong password"){
-        dialogsModule.alert({
-            message:"sorry wrong password",
-            okButtonText:"ok"
-        })
-        return Promise.reject();
-    }else if(!messageModel){
+        var topmost= frameModule.topmost();
+        topmost.navigate("./todos/todos"); 
+    })
+    // var submitLogin=  auth.login(user);
+    // console.log(submitLogin);
+    // if( submitLogin === "welcom"){
+    //     dialogsModule.alert({
+    //         message:"welcome to your todoList",
+    //         okButtonText:"ok"
+    //     })
+    //     return;
+    // }else if(submitLogin === "wrong password"){
+    //     dialogsModule.alert({
+    //         message:"sorry wrong password",
+    //         okButtonText:"ok"
+    //     })
+    //     return Promise.reject();
+    // }else if(!submitLogin){
         
-        dialogsModule.alert({
-            message:"wrong username",
-            okButtonText:"ok"
-        })
-        return Promise.reject();
-    }
-    alert("do somthing");
+    //     dialogsModule.alert({
+    //         message:"iojiojlk",
+    //         okButtonText:"ok"
+    //     })
+    //     return Promise.reject();
+    // }
 } 
 
 exports.pressSignUp = function () {
