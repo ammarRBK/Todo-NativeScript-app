@@ -33,8 +33,8 @@ function authSystem  (info){
     .catch(handleErrors)
     // console.log('Success:', response.password)
     .then(data => {
-        console.log(data);
-        if(data.username){
+        console.log("dataaaaaaaaaaaaaa",data);
+        if(data.username == userName){
             if(data.password === passWord){
                 console.log("--------------> welcom "+"\n"+data.password)
                 dialogsModule.alert({
@@ -49,12 +49,15 @@ function authSystem  (info){
             dialogsModule.alert({
                 title: "field login",
                 message:"wrong password",
-                okButtonText:"ok"
+                okButtonText:"cancel"
             })
             return Promise.reject()
-        }else {
-            alert("wrong username")
         }
+        // dialogsModule.alert({
+        //             title: "field login",
+        //             message:"welcohghjghjgh",
+        //             okButtonText:"ok"
+        //         }) 
     })
     // .then(handleErrors)
     // .then(function(response) {
@@ -97,8 +100,20 @@ function authSystem  (info){
 
 function handleErrors(response) {
     if (!response.ok) {
-        console.log(JSON.stringify(response));
-        throw Error(response.statusText);
+        console.log("989899999",JSON.stringify(response));
+        if(response.message === "wrong username" && response.user === null){
+            dialogsModule.alert({
+                    title: "field login",
+                    message:"something went wrong (mybe wrong username)",
+                    okButtonText:"cancel"
+                })
+        }
+        dialogsModule.alert({
+                    title: "field login",
+                    message:"something went wrong (we can not complete authintication)",
+                    okButtonText:"cancel"
+                })
+        // throw Error(response.statusText);
     }
     console.log("0909080",response)
     return response;
