@@ -1,5 +1,5 @@
 var config= require("../config/config").url;
-
+var dialogsModule = require("ui/dialogs");
 var fetchModel= require("fetch");
 var user= require("../../main-page").user;
 var observableModule = require("data/observable");
@@ -28,21 +28,40 @@ function authSystem  (info){
         }),
         headers:{
             "Content-Type": "application/json"
-        },
-        async:false
-    }).then(handleErrors)
-    .then(function(response) {
-        response.json();
-    })
-    .then(function(data) {
-        console.log(data.username);
-        if(data.password === passWord){
-            // console.log("--------------> welcom "+"\n"+data.password)
-            return "welcome"
         }
-        console.log("-------------------->"+"\n"+"wrong password")
-        throw Error("wrong password");
+    }).then(res => res.json())
+    .catch(handleErrors)
+    // console.log('Success:', response.password)
+    .then(data => {
+        console.log(data);
+        if(data.username){
+            if(data.password === passWord){
+                console.log("--------------> welcom "+"\n"+data.password)
+                dialogsModule.alert({
+                    title: "success login",
+                    message:"welcome to your todoList",
+                    okButtonText:"ok"
+                })
+                var topmost= frameModule.topmost();
+                topmost.navigate("./todos/todos");
+            }
+            console.log("-------------------->"+"\n"+"wrong password")
+            dialogsModule.alert({
+                title: "field login",
+                message:"wrong password",
+                okButtonText:"ok"
+            })
+            return Promise.reject()
+        }else {
+            alert("wrong username")
+        }
     })
+    // .then(handleErrors)
+    // .then(function(response) {
+    //     response.json();
+    // })
+    // .then(function(data) {
+    //     
 };
 
     viewModel.signup= function (newUser){
@@ -81,6 +100,7 @@ function handleErrors(response) {
         console.log(JSON.stringify(response));
         throw Error(response.statusText);
     }
+    console.log("0909080",response)
     return response;
 }
 

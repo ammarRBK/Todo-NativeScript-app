@@ -52,34 +52,35 @@ exports.signin= function (){
         username:page.getViewById("username").text,
         password:page.getViewById("password").text
     }
-    auth.login(user).catch(err => {
-        console.log("------>",err)
-        if(err === "wrong username"){
-            dialogsModule.alert({
-                title: "field login",
-                message:"wrong username",
-                okButtonText:"ok"
-            })
-            return Promise.reject()
-        }else if(err === "wrong password"){
-            dialogsModule.alert({
-                title: "field login",
-                message:"wrong password",
-                okButtonText:"ok"
-            })
-            return Promise.reject()
-        }
-    })
-    .then(function(data){
-        console.log(data)
-        dialogsModule.alert({
-            title: "success login",
-            message:"welcome to your todoList",
-            okButtonText:"ok"
-        })
-        var topmost= frameModule.topmost();
-        topmost.navigate("./todos/todos"); 
-    })
+    auth.login(user)
+    // .catch(err => {
+    //     console.log("------>",err)
+    //     if(err === "wrong username"){
+    //         dialogsModule.alert({
+    //             title: "field login",
+    //             message:"wrong username",
+    //             okButtonText:"ok"
+    //         })
+    //         return Promise.reject()
+    //     }else if(err === "wrong password"){
+    //         dialogsModule.alert({
+    //             title: "field login",
+    //             message:"wrong password",
+    //             okButtonText:"ok"
+    //         })
+    //         return Promise.reject()
+    //     }
+    // })
+    // .then(function(data){
+    //     console.log(data)
+    //     dialogsModule.alert({
+    //         title: "success login",
+    //         message:"welcome to your todoList",
+    //         okButtonText:"ok"
+    //     })
+    //     var topmost= frameModule.topmost();
+    //     topmost.navigate("./todos/todos"); 
+    // })
     // var submitLogin=  auth.login(user);
     // console.log(submitLogin);
     // if( submitLogin === "welcom"){
