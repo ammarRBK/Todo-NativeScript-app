@@ -19,40 +19,43 @@ exports.isLoaded= function(args){
 exports.signup= function (){
     var username= page.getViewById("username").text;
     var password= page.getViewById("password").text;
-    if(username.length){
-        if(password.length){
-            upFunction.signup({username:username,password:password}).then( ()=> {
-                if(!newUser){
-                throw Error("fill the user");
-            }
-            dialogsModel.alert({
-                message: "Welcom between us",
-                okButtonText: "ok"
-            })
-            const topmost = frameModule.topmost();
-            topmost.navigate("main-page");
-            }).catch(err => {
-                if(upFunction.signupMessage === "Oops can not save the user because"){
-                dialogsModel.alert({
-                    message: "we cnnot make your user",
-                    okButtonText: "cancel"
-                })
-            }
-            dialogsModel.alert({
-                message: "Welcom between us",
-                okButtonText: "ok"
-            })
-            const topmost = frameModule.topmost();
-            topmost.navigate("main-page");
-            })
-        }
+    if(username == ""){
+        dialogsModel.alert({
+            message: "we cnnot make your user because you have to input correct username",
+            okButtonText: "cancel"
+        })
+        return Promise.reject();
+        
+    }else if(password == ""){
         dialogsModel.alert({
             message: "we cnnot make your user because you have to input password",
             okButtonText: "cancel"
         })
+        return Promise.reject();
+    }
+    upFunction.signup({username:username,password:password}).then( ()=> {
+        if(!newUser){
+        throw Error("fill the user");
     }
     dialogsModel.alert({
-        message: "we cnnot make your user because you have to input correct username",
-        okButtonText: "cancel"
-    })  
+        message: "Welcom between us",
+        okButtonText: "ok"
+    })
+    const topmost = frameModule.topmost();
+    topmost.navigate("main-page");
+    }).catch(err => {
+        if(upFunction.signupMessage === "Oops can not save the user because"){
+        dialogsModel.alert({
+            message: "we cnnot make your user",
+            okButtonText: "cancel"
+        })
+    }
+    dialogsModel.alert({
+        message: "Welcom between us",
+        okButtonText: "ok"
+    })
+    const topmost = frameModule.topmost();
+    topmost.navigate("main-page");
+    })
+     
 }   

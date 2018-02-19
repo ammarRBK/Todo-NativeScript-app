@@ -75,10 +75,10 @@ function authSystem  (info){
                 "Content-Type":"application/json"
             },
             async: false
-        }).then(handleErrors)
-        .then(function(response) {
+        }).then(function(response) {
             return response.json();
         })
+        .then(handleErrors)
         .then(function(data) {
            viewModel.signupMessage= data; 
         });
