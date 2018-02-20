@@ -1,3 +1,13 @@
-<!-- <Page loaded="loaded"> -->
-    
-<!-- </Page> -->
+<Page loaded="loaded">
+    <GridLayout rows="auto, *" columns="2*, *">
+        <TextField id="newItem" hint="Enter a new task" row="0" col="0" text="{{task}}"/>
+        <Button text="add" tap="addNewTask" class="add"/>
+        <ListView items="{{ tasks }}" row="1" colSpan="2">
+            <ListView.itemTemplate>
+                <Label text="{{ task }}" id= "taskView" horizontalAlignment="right" verticalAlignment="center"/>
+                <Button class="delete" text="X" tap="deleteTask"/>
+            </ListView.itemTemplate>
+        </ListView>
+    </GridLayout>
+    <ActivityIndicator busy="loadTasks" rowSpan="2" colSpan="2"/>
+</Page>

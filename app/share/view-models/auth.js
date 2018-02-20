@@ -37,13 +37,13 @@ function authSystem  (info){
         if(data.username == userName){
             if(data.password === passWord){
                 console.log("--------------> welcom "+"\n"+data.password)
+                frameModule.topmost().navigate("app/todos/todos");
                 dialogsModule.alert({
                     title: "success login",
                     message:"welcome to your todoList",
                     okButtonText:"ok"
                 })
-                var topmost= frameModule.topmost();
-                topmost.navigate("./todos/todos");
+                
             }
             console.log("-------------------->"+"\n"+"wrong password")
             dialogsModule.alert({
