@@ -35,23 +35,24 @@ function authSystem  (info){
     .then(data => {
         console.log("dataaaaaaaaaaaaaa",data);
         if(data.username == userName){
-            if(data.password === passWord){
-                console.log("--------------> welcom "+"\n"+data.password)
-                frameModule.topmost().navigate("app/todos/todos");
-                dialogsModule.alert({
-                    title: "success login",
-                    message:"welcome to your todoList",
-                    okButtonText:"ok"
-                })
-                
-            }
-            console.log("-------------------->"+"\n"+"wrong password")
+            if(data.password !== passWord){
+                console.log("-------------------->"+"\n"+"wrong password")
             dialogsModule.alert({
                 title: "field login",
                 message:"wrong password",
                 okButtonText:"cancel"
             })
             return Promise.reject()
+                 
+            }
+            console.log("--------------> welcom "+"\n"+data.password)
+                
+            // dialogsModule.alert({
+            //     title: "success login",
+            //     message:"welcome to your todoList",
+            //     okButtonText:"ok"
+            // })
+            frameModule.topmost().navigate("todos/todos");
         }
         // dialogsModule.alert({
         //             title: "field login",

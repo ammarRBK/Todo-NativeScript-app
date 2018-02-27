@@ -1,13 +1,12 @@
 <Page loaded="loaded">
-    <GridLayout rows="auto, *" columns="2*, *">
-        <TextField id="newItem" hint="Enter a new task" row="0" col="0" text="{{task}}"/>
-        <Button text="add" tap="addNewTask" class="add"/>
-        <ListView items="{{ tasks }}" row="1" colSpan="2">
-            <ListView.itemTemplate>
-                <Label text="{{ task }}" id= "taskView" horizontalAlignment="right" verticalAlignment="center"/>
-                <Button class="delete" text="X" tap="deleteTask"/>
-            </ListView.itemTemplate>
-        </ListView>
-    </GridLayout>
-    <ActivityIndicator busy="loadTasks" rowSpan="2" colSpan="2"/>
+	<GridLayout rows="auto, *" columns="2*, *">
+		<TextField id="newTask" text="{{ task }}" hint="Enter a new task" row="0" col="0" />
+		<Button text="Add" tap="addNewTask" row="0" col="1" />
+		<ListView items="{{ tasks }}" id="tasks" row="1" colSpan="2">
+			<ListView.itemTemplate>
+				<Label text="{{ task }}" horizontalAlignment="left" verticalAlignment="center"/>
+			</ListView.itemTemplate>
+		</ListView>
+		<ActivityIndicator busy="false" rowSpan="2" colSpan="2" />
+	</GridLayout>
 </Page>
