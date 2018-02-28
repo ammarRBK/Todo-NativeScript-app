@@ -52,7 +52,8 @@ exports.signin= function (){
         username:page.getViewById("username").text,
         password:page.getViewById("password").text
     }
-    auth.login(user)
+   
+    auth.login(user);
     // .catch(err => {
     //     console.log("------>",err)
     //     if(err === "wrong username"){
