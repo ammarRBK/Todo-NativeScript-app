@@ -18,6 +18,7 @@ function tasksManager (item) {
                 return res;
             })
             .then(data => {
+                console.log(data)
                 viewModel.push({task:data.task,taskId:data.id});
             })
     };
@@ -34,7 +35,9 @@ function tasksManager (item) {
         })
         .then(data => {
             data.forEach(element => {
-                viewModel.push({task:element.task,taskId:element.id});
+                console.log(element);
+                viewModel.push({task:element.task,taskId:element.task_id});
+                console.log(viewModel);
             });
         })
     };

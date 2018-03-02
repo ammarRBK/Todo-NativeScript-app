@@ -2,13 +2,33 @@
 	<GridLayout rows="auto, *" columns="2*, *">
 		<TextField id="newTask" text="{{ taskField }}" hint="Enter a new task" row="0" col="0" />
 		<Button text="Add" tap="addNewTask" row="0" col="1" />
-		<Label id="exactTask" text="{{ errorMessage }}" horizontalAlignment="left" verticalAlignment="center"/>
 		<ListView items="{{ tasks }}" id="tasks" row="1" colSpan="2">
 			<ListView.itemTemplate>
-				<Label id="exactTask" text="{{ task }}" horizontalAlignment="left" verticalAlignment="center"/>
-				<Button text="X" tap="deleteTask"/>
+				<Label text="{{ city }}" horizontalAlignment="left" verticalAlignment="center"/>
 			</ListView.itemTemplate>
 		</ListView>
-		<ActivityIndicator busy="{{ busy }}" rowSpan="2" colSpan="2" />
+		<ActivityIndicator busy="{{ isLoading }}" rowSpan="2" colSpan="2" />
 	</GridLayout>
 </Page>
+<!-- <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
+
+  <ActionBar title="Cities - WIFI" />
+
+  <ListView>
+    <ListView.items>
+        <ListViewItem title="Nearest Wifi">
+            <ListViewItem.view>
+                <ListView items="{{ cities }}">
+                    <ListView.itemTemplate>
+                        <GridLayout columns="*" rows="*">
+                            <Label col="0" row="1" text="{{city}}" />
+                            <Label col="1" row="1" text="{{distance}}" />
+                            <Label col="2" row="1" text="{{votes}}" />
+                        </GridLayout>
+                    </ListView.itemTemplate>
+                </ListView>
+            </ListViewItem.view>
+        </ListViewItem>
+    </ListView.items>
+  </ListView>
+</Page> -->
